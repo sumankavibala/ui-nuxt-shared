@@ -5,20 +5,21 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'AlertComponent',
-  props: {
-    content: {
-      type: String,
-      required: true
-    }
-  },
-  methods: {
-    showAlert() {
-      alert(this.content); // Show content in an alert box
-    }
+<script setup>
+// Import `ref` and `defineProps` from Vue Composition API
+import { defineProps } from 'vue'
+
+// Define props with `defineProps` (Content to show in alert)
+const props = defineProps({
+  content: {
+    type: String,
+    required: true
   }
+})
+
+// Method to show the alert
+const showAlert = () => {
+  alert(props.content)
 }
 </script>
 
