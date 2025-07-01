@@ -1,5 +1,5 @@
 <template>
-  <Draggable
+  <VueDraggableNext
     v-model="localItems"
     handle=".drag-handle"
     item-key="id"
@@ -18,14 +18,13 @@
         </template>
       </AppCard>
     </template>
-  </Draggable>
+  </VueDraggableNext>
 </template>
 
 <script setup lang="ts">
 import { ref, watch, toRefs } from 'vue'
-import { Draggable } from 'vuedraggable'
+import { VueDraggableNext } from 'vue-draggable-next';
 
-import type { PropType } from 'vue'
 
 interface CardItem {
   id: number
