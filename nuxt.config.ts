@@ -2,5 +2,8 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
-  components: true,
+  components: {
+    global: true,
+    dirs: ['~/components'] // or wherever AppCard.vue lives
+  }
 })

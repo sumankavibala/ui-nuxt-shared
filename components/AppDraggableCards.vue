@@ -1,5 +1,5 @@
 <template>
-  <VueDraggableNext
+  <Draggable
     v-model="localItems"
     handle=".drag-handle"
     item-key="id"
@@ -7,24 +7,21 @@
     class="draggable-wrapper"
   >
     <template #item="{ element, index }">
-      <AppCard class="draggable-card">
-        <template #content>
-          <div class="card-header">
-            <i class="pi pi-ellipsis-v drag-handle" />
-            <span class="card-index">#{{ index + 1 }}</span>
-            <span class="card-title">{{ element.title }}</span>
-          </div>
-          <div class="card-body">{{ element.content }}</div>
-        </template>
-      </AppCard>
+      <div class="card">
+        <div class="card-header">
+          <i class="pi pi-ellipsis-v drag-handle" />
+          <span class="card-index">#{{ index + 1 }}</span>
+          <span class="card-title">{{ element.title }}</span>
+        </div>
+        <div class="card-body">{{ element.content }}</div>
+      </div>
     </template>
-  </VueDraggableNext>
+  </Draggable>
 </template>
 
 <script setup lang="ts">
 import { ref, watch, toRefs } from 'vue'
-import { VueDraggableNext } from 'vue-draggable-next';
-
+import { VueDraggableNext as Draggable } from 'vue-draggable-next'
 
 interface CardItem {
   id: number
@@ -43,8 +40,8 @@ const emit = defineEmits<{
 const { items } = toRefs(props)
 const localItems = ref<CardItem[]>([...items.value])
 
-watch(items, (newItems) => {
-  localItems.value = [...newItems]
+watch(items, (newVal) => {
+  localItems.value = [...newVal]
 })
 
 const emitSorted = () => {
@@ -59,18 +56,19 @@ const emitSorted = () => {
   gap: 16px;
 }
 
-.draggable-card {
-  background: white;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
-  padding: 1rem;
+.card {
+  background: #ffffff;
   border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 .card-header {
   display: flex;
   align-items: center;
   gap: 12px;
-  font-weight: bold;
+  font-weight: 600;
+  margin-bottom: 8px;
 }
 
 .drag-handle {
@@ -81,13 +79,18 @@ const emitSorted = () => {
 }
 
 .card-index {
-  background-color: #eef1f6;
+  background-color: #f0f2f5;
   padding: 0 8px;
   border-radius: 4px;
   font-size: 14px;
 }
 
+.card-title {
+  flex: 1;
+}
+
 .card-body {
-  margin-top: 8px;
+  font-size: 14px;
+  color: #444;
 }
 </style>
