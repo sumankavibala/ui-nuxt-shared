@@ -23,7 +23,8 @@
 
 <script setup lang="ts">
 import { ref, watch, toRefs } from 'vue'
-import Draggable from 'vuedraggable'
+import { Draggable } from 'vuedraggable'
+
 import type { PropType } from 'vue'
 
 interface CardItem {
